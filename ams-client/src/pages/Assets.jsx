@@ -45,7 +45,7 @@ function StatStrip({ assets }) {
     }), [assets]);
 
     return (
-        <div className="grid grid-cols-5 gap-2 mb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2 mb-4">
             {Object.entries(counts).map(([key, val]) => {
                 const Icon = STAT_ICONS[key];
                 const accent = key === "total";
@@ -167,7 +167,7 @@ export default function Assets() {
         <MainLayout>
 
             {/* ── Header ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 className="text-base font-bold leading-tight"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
@@ -177,7 +177,7 @@ export default function Assets() {
                         {assets.length} asset{assets.length !== 1 ? "s" : ""} registered
                     </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     <SearchBar
                         value={search}
                         placeholder="Search assets…"

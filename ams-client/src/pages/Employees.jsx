@@ -63,7 +63,7 @@ export default function Employees() {
         <MainLayout>
 
             {/* ── Header row ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
 
                 <div>
                     <h2
@@ -77,7 +77,7 @@ export default function Employees() {
                     </p>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     <SearchBar
                         value={search}
                         placeholder="Search employees…"
@@ -112,7 +112,7 @@ export default function Employees() {
                 data={filtered}
                 loading={loading}
                 renderActions={(emp) => (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
                         <button
                             onClick={() => { setEditingEmployee(emp); setShowModal(true); }}
                             className="p-1.5 rounded hover:bg-blue-50"

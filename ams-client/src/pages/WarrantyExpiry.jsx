@@ -202,7 +202,7 @@ export default function WarrantyExpiry() {
         <MainLayout>
 
             {/* ── Header ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 className="text-base font-bold leading-tight"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
@@ -212,7 +212,7 @@ export default function WarrantyExpiry() {
                         {enriched.filter(a => a.expiry_class === "expired" || a.expiry_class === "expiring-soon").length} asset{enriched.filter(a => a.expiry_class === "expired" || a.expiry_class === "expiring-soon").length !== 1 ? "s" : ""} require attention
                     </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     <SearchBar value={search} placeholder="Search assets…" onChange={e => setSearch(e.target.value)} />
                     <button onClick={loadAll}
                         className="flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold border"

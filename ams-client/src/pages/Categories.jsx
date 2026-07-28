@@ -247,7 +247,7 @@ export default function Categories() {
         <MainLayout>
 
             {/* ── Header ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 className="text-base font-bold leading-tight"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
@@ -257,7 +257,7 @@ export default function Categories() {
                         {categories.length} categor{categories.length !== 1 ? "ies" : "y"}
                     </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     {/* Search */}
                     <div className="relative">
                         <input value={search} onChange={e => setSearch(e.target.value)}

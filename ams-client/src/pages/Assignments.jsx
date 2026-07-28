@@ -31,7 +31,7 @@ function StatStrip({ assignments }) {
     ];
 
     return (
-        <div className="grid grid-cols-3 gap-2 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
             {cards.map(({ label, value, icon: Icon, accent }) => (
                 <div key={label}
                     className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 relative overflow-hidden"
@@ -160,7 +160,7 @@ export default function Assignments() {
         <MainLayout>
 
             {/* ── Header ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 className="text-base font-bold leading-tight"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
@@ -170,7 +170,7 @@ export default function Assignments() {
                         {assignments.filter(a => a.status === "active").length} active assignment{assignments.filter(a => a.status === "active").length !== 1 ? "s" : ""}
                     </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     <SearchBar
                         value={search}
                         placeholder="Search assignments…"

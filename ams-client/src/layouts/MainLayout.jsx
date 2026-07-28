@@ -7,7 +7,7 @@ import Navbar   from "../components/Navbar";
  */
 export default function MainLayout({ children, mainClassName = "", mainStyle = {} }) {
     return (
-        <div className="flex min-h-screen" style={{ backgroundColor: "#eef2f6" }}>
+        <div className="flex min-h-screen overflow-x-hidden" style={{ backgroundColor: "#eef2f6" }}>
 
             <Sidebar />
 

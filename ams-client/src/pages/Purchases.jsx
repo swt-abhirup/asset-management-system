@@ -41,7 +41,7 @@ function StatStrip({ purchases }) {
     ];
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2 mb-4">
             {cards.map(({ label, value, accent, alert }) => (
                 <div key={label}
                     className="rounded-lg px-3 py-2.5 relative overflow-hidden"
@@ -257,7 +257,7 @@ export default function Purchases() {
         <MainLayout>
 
             {/* ── Header ─────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 className="text-base font-bold leading-tight"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
@@ -267,7 +267,7 @@ export default function Purchases() {
                         {purchases.filter(p => p.payment_status !== "paid").length} order{purchases.filter(p => p.payment_status !== "paid").length !== 1 ? "s" : ""} awaiting payment
                     </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                     <SearchBar value={search} placeholder="Search orders…" onChange={e => setSearch(e.target.value)} />
                     <button onClick={() => { setEditing(null); setShowModal(true); }}
                         className="flex items-center gap-1.5 px-3 py-2 rounded text-xs font-semibold text-white"
