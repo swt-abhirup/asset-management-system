@@ -21,7 +21,53 @@ router.get("/", verifyToken, async (req, res) => {
     }
 });
 
-// GET /api/purchases/vendor/:vendor_id
+// GET /api/purchases/next-numbers  — generate next PO and INV numbers
+// Must be defined BEFORE /vendor/:vendor_id to avoid route conflict
+router.get("/next-numbers", verifyToken, async (req, res) => {
+    try {
+        const year = new Date().getFullYear();
+        const prefix_po  = `PO-${year}-`;
+        const prefix_inv = `INV-${year}-`;
+
+        const result = await client.send(new ScanCommand({
+            TableName: TABLES.PURCHASES,
+            ProjectionExpression: "po_number, invoice_number"
+        }));
+
+        const items = result.Items ?? [];
+
+        // Extract highest sequence for PO this year
+        const poNums = items
+            .map(i => i.po_number)
+            .filter(n => n?.startsWith(prefix_po))
+            .map(n => parseInt(n.replace(prefix_po, ""), 10))
+            .filter(n => !isNaN(n));
+
+        const invNums = items
+            .map(i => i.invoice_number)
+            .filter(n => n?.startsWith(prefix_inv))
+            .map(n => parseInt(n.replace(prefix_inv, ""), 10))
+            .filter(n => !isNaN(n));
+
+        const nextPo  = (poNums.length  ? Math.max(...poNums)  : 0) + 1;
+        const nextInv = (invNums.length ? Math.max(...invNums) : 0) + 1;
+
+        const pad = n => String(n).padStart(3, "0");
+
+        res.json({
+            success: true,
+            data: {
+                po_number:      `${prefix_po}${pad(nextPo)}`,
+                invoice_number: `${prefix_inv}${pad(nextInv)}`
+            }
+        });
+    } catch (err) {
+        console.error("Purchases next-numbers error:", err);
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+
 router.get("/vendor/:vendor_id", verifyToken, async (req, res) => {
     try {
         const result = await client.send(new QueryCommand({
