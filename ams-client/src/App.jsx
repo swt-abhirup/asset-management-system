@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SidebarProvider } from "./context/SidebarContext";
+import { SidebarProvider }       from "./context/SidebarContext";
+import { NotificationProvider }  from "./context/NotificationContext";
 
 import Login          from "./pages/Login";
 import Dashboard      from "./pages/Dashboard";
@@ -22,6 +23,7 @@ function App() {
     return (
         <BrowserRouter>
             <SidebarProvider>
+                <NotificationProvider>
                 <Toaster />
                 <ConfirmHost />
                 <Routes>
@@ -73,6 +75,7 @@ function App() {
                     } />
 
                 </Routes>
+            </NotificationProvider>
             </SidebarProvider>
         </BrowserRouter>
     );

@@ -53,8 +53,8 @@ function StatStrip({ assets }) {
                     <div key={key}
                         className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 relative overflow-hidden"
                         style={{
-                            backgroundColor: accent ? "#19405e" : "#ffffff",
-                            border: `1px solid ${accent ? "transparent" : "#e2e8f0"}`,
+                            backgroundColor: accent ? "#19405e" : "#eaf2f8",
+                            border: `1px solid ${accent ? "transparent" : "#c8dff0"}`,
                             boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
                         }}>
                         {/* left accent bar */}
@@ -66,7 +66,7 @@ function StatStrip({ assets }) {
                         </div>
                         <div>
                             <p className="text-xs leading-none mb-0.5"
-                                style={{ color: accent ? "#a8c4d8" : "#64748b" }}>
+                                style={{ color: accent ? "#a8c4d8" : "#5a7a93" }}>
                                 {STAT_LABELS[key]}
                             </p>
                             <p className="text-lg font-bold leading-none"

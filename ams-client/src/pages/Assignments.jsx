@@ -36,8 +36,8 @@ function StatStrip({ assignments }) {
                 <div key={label}
                     className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 relative overflow-hidden"
                     style={{
-                        backgroundColor: accent ? "#19405e" : "#ffffff",
-                        border: `1px solid ${accent ? "transparent" : "#e2e8f0"}`,
+                        backgroundColor: accent ? "#19405e" : "#eaf2f8",
+                        border: `1px solid ${accent ? "transparent" : "#c8dff0"}`,
                         boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
                     }}>
                     <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l"
@@ -48,7 +48,7 @@ function StatStrip({ assignments }) {
                     </div>
                     <div>
                         <p className="text-xs leading-none mb-0.5"
-                            style={{ color: accent ? "#a8c4d8" : "#64748b" }}>{label}</p>
+                            style={{ color: accent ? "#a8c4d8" : "#5a7a93" }}>{label}</p>
                         <p className="text-lg font-bold leading-none"
                             style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: accent ? "#fff" : "#19405e" }}>
                             {value}

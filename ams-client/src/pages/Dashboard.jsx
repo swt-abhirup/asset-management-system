@@ -3,11 +3,11 @@ import {
     Users, Monitor, CheckCircle, ClipboardList, Wrench,
     AlertTriangle, ArrowRight, ShieldAlert, Building2,
     ShoppingCart, Hammer, IndianRupee, RotateCcw, Clock
-} from "lucide-react";
-import MainLayout from "../layouts/MainLayout";
+} from "lucide-react";import MainLayout from "../layouts/MainLayout";
 import KPI        from "../components/KPI";
 import api        from "../services/api";
 import { toast }  from "../components/Toast";
+import { useNotifications } from "../context/NotificationContext";
 
 // ── Section label ────────────────────────────────────────────────
 function SectionLabel({ children }) {
@@ -57,25 +57,6 @@ function QuickLink({ label, path, icon: Icon, desc }) {
             <ArrowRight size={13} className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
                 style={{ color: "#19405e" }} />
         </a>
-    );
-}
-
-// ── Alert banner ─────────────────────────────────────────────────
-function AlertBanner({ icon: Icon, message, color, bg, border, href, linkText }) {
-    return (
-        <div className="flex items-center justify-between px-4 py-2.5 rounded-lg"
-            style={{ backgroundColor: bg, border: `1px solid ${border}` }}>
-            <div className="flex items-center gap-2">
-                <Icon size={14} style={{ color, flexShrink: 0 }} />
-                <p className="text-xs" style={{ color }}>{message}</p>
-            </div>
-            {href && (
-                <a href={href} className="text-xs font-semibold ml-4 flex-shrink-0"
-                    style={{ color, textDecoration: "none" }}>
-                    {linkText} →
-                </a>
-            )}
-        </div>
     );
 }
 
@@ -134,12 +115,27 @@ export default function Dashboard() {
 
     const [stats,   setStats]   = useState(null);
     const [loading, setLoading] = useState(true);
+    const { setAlerts } = useNotifications();
 
     useEffect(() => {
         (async () => {
             try {
                 const res = await api.get("/api/dashboard");
-                setStats(res.data.data);
+                const s   = res.data.data;
+                setStats(s);
+
+                // Build alerts and push to notification context (bell icon)
+                const alerts = [];
+                if (s.warranty?.expired > 0)
+                    alerts.push({ id: "warranty-expired", type: "danger", icon: "ShieldAlert", message: `${s.warranty.expired} asset${s.warranty.expired !== 1 ? "s" : ""} with expired warranty.`, href: "/warranty-expiry", linkText: "Review" });
+                if (s.warranty?.expiring_soon > 0)
+                    alerts.push({ id: "warranty-soon",    type: "warn",   icon: "ShieldAlert", message: `${s.warranty.expiring_soon} asset${s.warranty.expiring_soon !== 1 ? "s" : ""} warranty expiring within 30 days.`, href: "/warranty-expiry", linkText: "Review" });
+                if (s.repairs?.critical > 0)
+                    alerts.push({ id: "repairs-critical", type: "danger", icon: "Hammer",      message: `${s.repairs.critical} critical repair request${s.repairs.critical !== 1 ? "s" : ""} open.`, href: "/repair-requests", linkText: "View" });
+                if (s.procurement?.pending_payment > 0)
+                    alerts.push({ id: "pending-payment",  type: "warn",   icon: "ShoppingCart",message: `${s.procurement.pending_payment} purchase order${s.procurement.pending_payment !== 1 ? "s" : ""} awaiting payment.`, href: "/purchases", linkText: "View" });
+                setAlerts(alerts);
+
             } catch {
                 toast.error("Failed to load dashboard.");
             } finally {
@@ -150,28 +146,8 @@ export default function Dashboard() {
 
     const s = stats;
 
-    // Build alert banners
-    const alerts = [];
-    if (s) {
-        if (s.warranty?.expired > 0)
-            alerts.push({ icon: ShieldAlert, message: `${s.warranty.expired} asset${s.warranty.expired !== 1 ? "s" : ""} with expired warranty.`, color: "#dc2626", bg: "#fff5f5", border: "#fca5a5", href: "/warranty-expiry", linkText: "Review" });
-        if (s.warranty?.expiring_soon > 0)
-            alerts.push({ icon: ShieldAlert, message: `${s.warranty.expiring_soon} asset${s.warranty.expiring_soon !== 1 ? "s" : ""} warranty expiring within 30 days.`, color: "#c2410c", bg: "#fff7ed", border: "#fed7aa", href: "/warranty-expiry", linkText: "Review" });
-        if (s.repairs?.critical > 0)
-            alerts.push({ icon: Hammer, message: `${s.repairs.critical} critical repair request${s.repairs.critical !== 1 ? "s" : ""} open.`, color: "#dc2626", bg: "#fff5f5", border: "#fca5a5", href: "/repair-requests", linkText: "View" });
-        if (s.procurement?.pending_payment > 0)
-            alerts.push({ icon: ShoppingCart, message: `${s.procurement.pending_payment} purchase order${s.procurement.pending_payment !== 1 ? "s" : ""} awaiting payment.`, color: "#b45309", bg: "#fffbeb", border: "#fde68a", href: "/purchases", linkText: "View" });
-    }
-
     return (
         <MainLayout mainClassName="flex flex-col gap-5">
-
-                    {/* ── Alert banners ─────────────────────────── */}
-                    {alerts.length > 0 && (
-                        <section className="flex flex-col gap-2">
-                            {alerts.map((a, i) => <AlertBanner key={i} {...a} />)}
-                        </section>
-                    )}
 
                     {/* ── Assets & People ───────────────────────── */}
                     <section>
@@ -251,12 +227,12 @@ export default function Dashboard() {
                         <SectionLabel>Operations</SectionLabel>
                         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
                             {loading ? Array(6).fill(0).map((_, i) => <KpiSkeleton key={i} />) : [
-                                { title: "Open Repairs",      value: s?.repairs?.open,              icon: Hammer,        accent: s?.repairs?.open > 0  },
-                                { title: "Critical Repairs",  value: s?.repairs?.critical,          icon: AlertTriangle, accent: s?.repairs?.critical > 0 },
-                                { title: "In Progress",       value: s?.repairs?.in_progress,       icon: Wrench,        accent: false },
+                                { title: "Open Repairs",      value: s?.repairs?.open,              icon: Hammer,        accent: s?.repairs?.open > 0 ? "danger" : false },
+                                { title: "Critical Repairs",  value: s?.repairs?.critical,          icon: AlertTriangle, accent: s?.repairs?.critical > 0 ? "danger" : false },
+                                { title: "In Progress",       value: s?.repairs?.in_progress,       icon: Wrench,        accent: s?.repairs?.in_progress > 0 ? "warn" : false },
                                 { title: "Maintenance Open",  value: (s?.maintenance?.scheduled ?? 0) + (s?.maintenance?.in_progress ?? 0), icon: Clock, accent: false },
-                                { title: "Expired Warranty",  value: s?.warranty?.expired,          icon: ShieldAlert,   accent: s?.warranty?.expired > 0 },
-                                { title: "Expiring ≤30d",     value: s?.warranty?.expiring_soon,    icon: ShieldAlert,   accent: false },
+                                { title: "Expired Warranty",  value: s?.warranty?.expired,          icon: ShieldAlert,   accent: s?.warranty?.expired > 0 ? "danger" : false },
+                                { title: "Expiring ≤30d",     value: s?.warranty?.expiring_soon,    icon: ShieldAlert,   accent: s?.warranty?.expiring_soon > 0 ? "warn" : false },
                             ].map(k => <KPI key={k.title} {...k} />)}
                         </div>
                     </section>

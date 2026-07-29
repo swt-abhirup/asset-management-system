@@ -37,14 +37,14 @@ function StatStrip({ vendors, purchases }) {
                 <div key={label}
                     className="rounded-lg px-3 py-2.5 relative overflow-hidden"
                     style={{
-                        backgroundColor: accent ? "#19405e" : "#ffffff",
-                        border: `1px solid ${alert ? "#fca5a5" : accent ? "transparent" : "#e2e8f0"}`,
+                        backgroundColor: accent ? "#19405e" : "#eaf2f8",
+                        border: `1px solid ${alert ? "#fca5a5" : accent ? "transparent" : "#c8dff0"}`,
                         boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
                     }}>
                     <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l"
                         style={{ backgroundColor: alert ? "#dc2626" : accent ? "#f5cba7" : "#19405e" }} />
                     <p className="text-xs leading-none mb-1 pl-1"
-                        style={{ color: accent ? "#a8c4d8" : "#64748b" }}>{label}</p>
+                        style={{ color: accent ? "#a8c4d8" : "#5a7a93" }}>{label}</p>
                     <p className="text-base font-bold leading-none pl-1"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: alert ? "#dc2626" : accent ? "#fff" : "#19405e" }}>
                         {value}
@@ -60,105 +60,100 @@ function VendorCard({ vendor, purchaseCount, totalSpend, onEdit, onDelete }) {
     const cs = CATEGORY_COLORS[vendor.category] ?? CATEGORY_COLORS.Other;
 
     return (
-        <div className="rounded-lg p-4 flex flex-col gap-3 group"
-            style={{ backgroundColor: "#fff", border: "1px solid #e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+        <div className="rounded-lg px-3 py-2.5 group"
+            style={{
+                backgroundColor: "#fff",
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04)"
+            }}
             onMouseEnter={e => e.currentTarget.style.borderColor = "#19405e"}
             onMouseLeave={e => e.currentTarget.style.borderColor = "#e2e8f0"}>
 
-            {/* Top */}
-            <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                        <div className="w-8 h-8 rounded flex items-center justify-center flex-shrink-0"
-                            style={{ backgroundColor: "rgba(25,64,94,0.08)" }}>
-                            <Building2 size={15} style={{ color: "#19405e" }} />
-                        </div>
-                        <p className="text-sm font-bold truncate"
-                            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
-                            {vendor.name}
-                        </p>
+            {/* ── Row 1: name + actions ───────────────── */}
+            <div className="flex items-center justify-between gap-2 mb-1">
+                <div className="flex items-center gap-1.5 min-w-0">
+                    <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: "rgba(25,64,94,0.08)" }}>
+                        <Building2 size={12} style={{ color: "#19405e" }} />
                     </div>
-                    {vendor.category && (
-                        <span className="text-xs px-2 py-0.5 rounded font-medium ml-10"
-                            style={{ backgroundColor: cs.bg, color: cs.color }}>
-                            {vendor.category}
-                        </span>
-                    )}
+                    <p className="text-xs font-bold truncate"
+                        style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: "#19405e" }}>
+                        {vendor.name}
+                    </p>
                 </div>
 
-                {/* Status + actions */}
-                <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                    <span className="text-xs px-2 py-0.5 rounded font-medium capitalize"
+                {/* Action buttons — visible on hover */}
+                <div className="flex items-center gap-0.5 flex-shrink-0">
+                    <span className="text-xs px-1.5 py-0.5 rounded font-medium capitalize mr-1"
                         style={{
                             backgroundColor: vendor.status === "active" ? "rgba(25,64,94,0.08)" : "#f8fafc",
                             color:           vendor.status === "active" ? "#19405e" : "#94a3b8"
                         }}>
                         {vendor.status}
                     </span>
-                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button onClick={onEdit}
-                            className="w-6 h-6 rounded flex items-center justify-center"
+                            className="w-5 h-5 rounded flex items-center justify-center"
                             style={{ color: "#1b4f72" }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = "#eff6ff"}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}>
-                            <Pencil size={11} />
+                            <Pencil size={10} />
                         </button>
                         <button onClick={onDelete}
-                            className="w-6 h-6 rounded flex items-center justify-center"
+                            className="w-5 h-5 rounded flex items-center justify-center"
                             style={{ color: "#dc2626" }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = "#fff5f5"}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}>
-                            <Trash2 size={11} />
+                            <Trash2 size={10} />
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Contact info */}
-            <div className="flex flex-col gap-1.5">
+            {/* ── Row 2: category badge ───────────────── */}
+            {vendor.category && (
+                <div className="mb-1.5">
+                    <span className="text-xs px-1.5 py-0.5 rounded font-medium"
+                        style={{ backgroundColor: cs.bg, color: cs.color, fontSize: "10px" }}>
+                        {vendor.category}
+                    </span>
+                </div>
+            )}
+
+            {/* ── Row 3: contact info inline ──────────── */}
+            <div className="flex flex-col gap-0.5">
                 {vendor.contact_person && (
-                    <p className="text-xs" style={{ color: "#64748b" }}>
+                    <p className="text-xs truncate" style={{ color: "#64748b", fontSize: "11px" }}>
                         👤 {vendor.contact_person}
                     </p>
                 )}
                 {vendor.email && (
-                    <div className="flex items-center gap-1.5">
-                        <Mail size={11} style={{ color: "#94a3b8", flexShrink: 0 }} />
-                        <a href={`mailto:${vendor.email}`}
-                            className="text-xs truncate"
-                            style={{ color: "#1b4f72", textDecoration: "none" }}>
+                    <div className="flex items-center gap-1 min-w-0">
+                        <Mail size={10} style={{ color: "#94a3b8", flexShrink: 0 }} />
+                        <a href={`mailto:${vendor.email}`} className="text-xs truncate"
+                            style={{ color: "#1b4f72", textDecoration: "none", fontSize: "11px" }}>
                             {vendor.email}
                         </a>
                     </div>
                 )}
                 {vendor.phone && (
-                    <div className="flex items-center gap-1.5">
-                        <Phone size={11} style={{ color: "#94a3b8", flexShrink: 0 }} />
-                        <span className="text-xs" style={{ color: "#64748b" }}>{vendor.phone}</span>
-                    </div>
-                )}
-                {vendor.website && (
-                    <div className="flex items-center gap-1.5">
-                        <Globe size={11} style={{ color: "#94a3b8", flexShrink: 0 }} />
-                        <a href={vendor.website} target="_blank" rel="noreferrer"
-                            className="text-xs truncate"
-                            style={{ color: "#1b4f72", textDecoration: "none" }}>
-                            {vendor.website.replace(/^https?:\/\//, "")}
-                        </a>
+                    <div className="flex items-center gap-1">
+                        <Phone size={10} style={{ color: "#94a3b8", flexShrink: 0 }} />
+                        <span className="text-xs" style={{ color: "#64748b", fontSize: "11px" }}>{vendor.phone}</span>
                     </div>
                 )}
             </div>
 
-            {/* Footer stats */}
-            <div className="flex items-center justify-between pt-2 border-t" style={{ borderColor: "#f1f5f9" }}>
+            {/* ── Row 4: footer stats ─────────────────── */}
+            <div className="flex items-center justify-between mt-2 pt-1.5 border-t" style={{ borderColor: "#f1f5f9" }}>
                 <div className="flex items-center gap-1">
-                    <ShoppingCart size={11} style={{ color: "#94a3b8" }} />
-                    <span className="text-xs" style={{ color: "#64748b" }}>
+                    <ShoppingCart size={10} style={{ color: "#94a3b8" }} />
+                    <span style={{ color: "#64748b", fontSize: "11px" }}>
                         {purchaseCount} order{purchaseCount !== 1 ? "s" : ""}
                     </span>
                 </div>
                 {totalSpend > 0 && (
-                    <span className="text-xs font-semibold" style={{ color: "#19405e" }}>
+                    <span className="text-xs font-semibold" style={{ color: "#19405e", fontSize: "11px" }}>
                         ₹ {totalSpend.toLocaleString("en-IN")}
                     </span>
                 )}
@@ -287,18 +282,15 @@ export default function Vendors() {
 
             {/* ── Vendor cards grid ───────────────────────── */}
             {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-                    {Array(6).fill(0).map((_, i) => (
-                        <div key={i} className="rounded-lg p-4 animate-pulse"
-                            style={{ backgroundColor: "#fff", border: "1px solid #e2e8f0", height: "160px" }}>
-                            <div className="flex gap-2 mb-3">
-                                <div className="w-8 h-8 rounded" style={{ backgroundColor: "#f1f5f9" }} />
-                                <div className="flex-1">
-                                    <div className="h-3 rounded mb-1.5" style={{ backgroundColor: "#f1f5f9", width: "50%" }} />
-                                    <div className="h-2.5 rounded" style={{ backgroundColor: "#f8fafc", width: "30%" }} />
-                                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                    {Array(8).fill(0).map((_, i) => (
+                        <div key={i} className="rounded-lg px-3 py-2.5 animate-pulse"
+                            style={{ backgroundColor: "#fff", border: "1px solid #e2e8f0", height: "110px" }}>
+                            <div className="flex gap-2 mb-2">
+                                <div className="w-6 h-6 rounded" style={{ backgroundColor: "#f1f5f9" }} />
+                                <div className="h-3 rounded flex-1" style={{ backgroundColor: "#f1f5f9", width: "50%" }} />
                             </div>
-                            <div className="space-y-2">
+                            <div className="space-y-1.5">
                                 <div className="h-2.5 rounded" style={{ backgroundColor: "#f8fafc" }} />
                                 <div className="h-2.5 rounded" style={{ backgroundColor: "#f8fafc", width: "70%" }} />
                             </div>
@@ -315,7 +307,7 @@ export default function Vendors() {
                     </p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
                     {filtered.map(v => (
                         <VendorCard
                             key={v.vendor_id}

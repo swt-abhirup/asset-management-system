@@ -46,14 +46,14 @@ function StatStrip({ purchases }) {
                 <div key={label}
                     className="rounded-lg px-3 py-2.5 relative overflow-hidden"
                     style={{
-                        backgroundColor: accent ? "#19405e" : "#ffffff",
-                        border: `1px solid ${alert ? "#fca5a5" : accent ? "transparent" : "#e2e8f0"}`,
+                        backgroundColor: accent ? "#19405e" : "#eaf2f8",
+                        border: `1px solid ${alert ? "#fca5a5" : accent ? "transparent" : "#c8dff0"}`,
                         boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
                     }}>
                     <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l"
                         style={{ backgroundColor: alert ? "#dc2626" : accent ? "#f5cba7" : "#19405e" }} />
                     <p className="text-xs leading-none mb-1 pl-1"
-                        style={{ color: accent ? "#a8c4d8" : "#64748b" }}>{label}</p>
+                        style={{ color: accent ? "#a8c4d8" : "#5a7a93" }}>{label}</p>
                     <p className="text-base font-bold leading-none pl-1"
                         style={{ fontFamily: "'Bricolage Grotesque', sans-serif", color: alert ? "#dc2626" : accent ? "#fff" : "#19405e" }}>
                         {value}

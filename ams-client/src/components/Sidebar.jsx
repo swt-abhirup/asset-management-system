@@ -191,10 +191,10 @@ export default function Sidebar() {
     return (
         <>
             {/* ── Desktop sidebar (md+) ─────────────────── */}
-            <aside className="hidden md:flex flex-col flex-shrink-0 sticky top-0"
+            <aside className="hidden md:flex flex-col flex-shrink-0 sticky top-0 self-start"
                 style={{
                     backgroundColor: "#19405e",
-                    height: "100vh",
+                    height: "100vh",        /* viewport-locked so it scrolls with sticky */
                     width: collapsed ? "56px" : "224px",
                     transition: "width 0.22s ease",
                     overflow: "hidden",
