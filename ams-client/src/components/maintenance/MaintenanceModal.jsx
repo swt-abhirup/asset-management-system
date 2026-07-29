@@ -61,7 +61,7 @@ export default function MaintenanceModal({ log, assetName, onClose, onSaved }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center"
             style={{ backgroundColor: "rgba(0,0,0,0.45)" }}>
 
-            <div className="w-full max-w-lg rounded-xl shadow-2xl" style={{ backgroundColor: "#ffffff" }}>
+            <div className="w-full max-w-lg mx-4 sm:mx-auto rounded-xl shadow-2xl" style={{ backgroundColor: "#ffffff" }}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-3.5 border-b"

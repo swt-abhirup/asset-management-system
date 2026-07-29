@@ -233,6 +233,7 @@ export default function RepairRequests() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

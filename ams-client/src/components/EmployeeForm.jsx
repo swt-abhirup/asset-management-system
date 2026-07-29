@@ -54,7 +54,7 @@ export default function EmployeeForm({ refreshEmployees }) {
                 </h3>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
                 <div>
                     <label style={labelStyle}>Full Name</label>
                     <input name="fullname" value={form.fullname} onChange={handleChange}

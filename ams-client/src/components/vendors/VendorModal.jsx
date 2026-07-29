@@ -47,7 +47,7 @@ export default function VendorModal({ vendor, onClose, onSaved }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center"
             style={{ backgroundColor: "rgba(0,0,0,0.45)" }}>
 
-            <div className="w-full max-w-2xl rounded-xl shadow-2xl" style={{ backgroundColor: "#fff" }}>
+            <div className="w-full max-w-2xl mx-4 sm:mx-auto rounded-xl shadow-2xl" style={{ backgroundColor: "#fff" }}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-3.5 border-b"
@@ -69,7 +69,7 @@ export default function VendorModal({ vendor, onClose, onSaved }) {
 
                 {/* Body */}
                 <div className="px-5 py-4 flex flex-col gap-3">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="col-span-2 md:col-span-1">
                             <label style={L}>Vendor Name *</label>
                             <input name="name" value={form.name} onChange={set}
@@ -84,7 +84,7 @@ export default function VendorModal({ vendor, onClose, onSaved }) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label style={L}>Contact Person</label>
                             <input name="contact_person" value={form.contact_person} onChange={set}
@@ -97,7 +97,7 @@ export default function VendorModal({ vendor, onClose, onSaved }) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label style={L}>Phone</label>
                             <input name="phone" value={form.phone} onChange={set}
@@ -110,7 +110,7 @@ export default function VendorModal({ vendor, onClose, onSaved }) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label style={L}>Address</label>
                             <input name="address" value={form.address} onChange={set}

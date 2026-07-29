@@ -276,6 +276,7 @@ export default function WarrantyExpiry() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

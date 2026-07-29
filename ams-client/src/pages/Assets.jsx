@@ -104,7 +104,6 @@ export default function Assets() {
             setAssets(aRes.data.data     ?? []);
             setCategories(cRes.data.data ?? []);
         } catch (err) {
-            console.error("Assets load error:", err);
             toast.error("Failed to load assets.");
         } finally {
             setLoading(false);
@@ -207,7 +206,7 @@ export default function Assets() {
             )}
 
             {/* ── Status filter tabs ──────────────────────── */}
-            <div className="flex gap-1 mb-3">
+            <div className="flex flex-wrap gap-1 mb-3">
                 {STATUS_TABS.map(tab => {
                     const active = activeTab === tab.key;
                     const count  = tabCount(tab.key);
@@ -235,6 +234,7 @@ export default function Assets() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

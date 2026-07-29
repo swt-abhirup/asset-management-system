@@ -53,7 +53,7 @@ export default function RepairForm({ assets, onSaved }) {
             </div>
 
             {/* Row 1 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div className="md:col-span-2">
                     <label style={L}>Asset *</label>
                     <select name="asset_id" value={form.asset_id} onChange={set} style={IS}>

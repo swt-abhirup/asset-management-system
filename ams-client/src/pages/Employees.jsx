@@ -26,7 +26,6 @@ export default function Employees() {
             const res = await api.get("/api/employees");
             setEmployees(res.data.data);
         } catch (err) {
-            console.error(err);
             toast.error("Failed to load employees.");
         } finally {
             setLoading(false);

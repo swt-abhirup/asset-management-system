@@ -253,7 +253,7 @@ export default function Profile() {
 
                 {/* ── Hero header ───────────────────────────── */}
                 <Card>
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                         <Avatar name={profile?.fullname} size={56} />
                         <div className="flex-1 min-w-0">
                             <h2 className="text-lg font-bold leading-tight"
@@ -531,7 +531,7 @@ export default function Profile() {
 
                 {/* ── Danger zone ───────────────────────────── */}
                 <Card>
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                         <div>
                             <div className="flex items-center gap-2 mb-1">
                                 <AlertTriangle size={14} style={{ color: "#dc2626" }} />

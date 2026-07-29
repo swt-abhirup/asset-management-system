@@ -114,6 +114,22 @@ router.post("/", verifyToken, async (req, res) => {
             });
         }
 
+        // Check employee exists and is active
+        const empResult = await client.send(
+            new GetCommand({ TableName: TABLES.USERS, Key: { email: employee_email } })
+        );
+
+        if (!empResult.Item) {
+            return res.status(404).json({ success: false, message: "Employee not found" });
+        }
+
+        if (empResult.Item.status !== "active") {
+            return res.status(403).json({
+                success: false,
+                message: `Cannot assign asset to an inactive employee`
+            });
+        }
+
         const assignment = {
             assignment_id:   uuidv4(),
             asset_id,

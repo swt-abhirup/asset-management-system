@@ -30,8 +30,8 @@ export default function AssetDrawer({ asset, categoryName, onClose, onEdit, onDe
                 style={{ backgroundColor: "rgba(0,0,0,0.25)" }} />
 
             {/* Panel */}
-            <div className="fixed right-0 top-0 bottom-0 z-50 flex flex-col w-80 shadow-2xl"
-                style={{ backgroundColor: "#ffffff" }}>
+            <div className="fixed right-0 top-0 bottom-0 z-50 flex flex-col shadow-2xl"
+                style={{ backgroundColor: "#ffffff", width: "min(320px, 100vw)" }}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-4 py-3 border-b"

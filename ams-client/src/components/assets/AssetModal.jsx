@@ -49,7 +49,7 @@ export default function AssetModal({ asset, categories, onClose, onSaved }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center"
             style={{ backgroundColor: "rgba(0,0,0,0.45)" }}>
 
-            <div className="w-full max-w-xl rounded-xl shadow-2xl" style={{ backgroundColor: "#ffffff" }}>
+            <div className="w-full max-w-xl mx-4 sm:mx-auto rounded-xl shadow-2xl" style={{ backgroundColor: "#ffffff" }}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-3.5 border-b" style={{ borderColor: "#f1f5f9" }}>
@@ -107,7 +107,7 @@ export default function AssetModal({ asset, categories, onClose, onSaved }) {
                             </select>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label style={label}>Purchase Date</label>
                             <input type="date" name="purchase_date" value={form.purchase_date ?? ""} onChange={set}

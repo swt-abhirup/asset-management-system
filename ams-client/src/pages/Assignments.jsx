@@ -85,7 +85,6 @@ export default function Assignments() {
             setAssets(     assetRes.data.data ?? []);
             setEmployees(  empRes.data.data   ?? []);
         } catch (err) {
-            console.error("Assignments load error:", err);
             toast.error("Failed to load assignments.");
         } finally {
             setLoading(false);
@@ -201,7 +200,7 @@ export default function Assignments() {
             )}
 
             {/* ── Status tabs ────────────────────────────── */}
-            <div className="flex gap-1 mb-3">
+            <div className="flex flex-wrap gap-1 mb-3">
                 {STATUS_TABS.map(tab => {
                     const active = activeTab === tab.key;
                     return (
@@ -228,6 +227,7 @@ export default function Assignments() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

@@ -57,7 +57,7 @@ export default function MaintenanceForm({ assets, onSaved }) {
             </div>
 
             {/* Row 1 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div className="md:col-span-2">
                     <label style={L}>Asset *</label>
                     <select name="asset_id" value={form.asset_id} onChange={set} style={I}>
@@ -86,7 +86,7 @@ export default function MaintenanceForm({ assets, onSaved }) {
             </div>
 
             {/* Row 2 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div className="md:col-span-2">
                     <label style={L}>Description *</label>
                     <input name="description" value={form.description} onChange={set}
@@ -105,7 +105,7 @@ export default function MaintenanceForm({ assets, onSaved }) {
             </div>
 
             {/* Row 3 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div>
                     <label style={L}>Scheduled Date</label>
                     <input type="date" name="scheduled_date" value={form.scheduled_date} onChange={set}

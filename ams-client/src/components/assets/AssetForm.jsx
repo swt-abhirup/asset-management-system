@@ -56,7 +56,7 @@ export default function AssetForm({ categories, onSaved }) {
                 </h3>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div>
                     <label style={label}>Asset Name *</label>
                     <input name="name" value={form.name} onChange={set} placeholder="e.g. Dell Laptop"
@@ -83,7 +83,7 @@ export default function AssetForm({ categories, onSaved }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 <div>
                     <label style={label}>Serial Number</label>
                     <input name="serial_number" value={form.serial_number} onChange={set} placeholder="SN-XXXXX"

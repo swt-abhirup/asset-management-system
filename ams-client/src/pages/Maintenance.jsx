@@ -102,7 +102,6 @@ export default function Maintenance() {
             setLogs(  logRes.data.data   ?? []);
             setAssets(assetRes.data.data ?? []);
         } catch (err) {
-            console.error(err);
             toast.error("Failed to load maintenance data.");
         } finally {
             setLoading(false);
@@ -205,7 +204,7 @@ export default function Maintenance() {
             )}
 
             {/* ── Tabs ───────────────────────────────────── */}
-            <div className="flex gap-1 mb-3">
+            <div className="flex flex-wrap gap-1 mb-3">
                 {STATUS_TABS.map(tab => {
                     const active = activeTab === tab.key;
                     return (
@@ -231,6 +230,7 @@ export default function Maintenance() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

@@ -268,7 +268,7 @@ export default function Vendors() {
             <StatStrip vendors={vendors} purchases={purchases} />
 
             {/* ── Category filter pills ───────────────────── */}
-            <div className="flex gap-1 mb-4 flex-wrap">
+            <div className="flex flex-wrap gap-1 mb-4">
                 {categories.map(cat => {
                     const active = catFilter === cat;
                     return (

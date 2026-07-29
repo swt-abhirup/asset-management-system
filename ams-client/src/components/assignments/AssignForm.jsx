@@ -13,7 +13,8 @@ export default function AssignForm({ assets, employees, onSaved }) {
     const [form,   setForm]   = useState({ asset_id: "", employee_email: "", notes: "" });
     const [saving, setSaving] = useState(false);
 
-    const availableAssets = assets.filter(a => a.status === "available");
+    const availableAssets    = assets.filter(a => a.status === "available");
+    const activeEmployees    = employees.filter(e => e.status === "active");
 
     const set = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
@@ -68,12 +69,15 @@ export default function AssignForm({ assets, employees, onSaved }) {
                     <label style={label}>Assign To *</label>
                     <select name="employee_email" value={form.employee_email} onChange={set} style={inputSt}>
                         <option value="">— Select employee —</option>
-                        {employees.map(e => (
+                        {activeEmployees.map(e => (
                             <option key={e.email} value={e.email}>
                                 {e.fullname} · {e.department || e.role}
                             </option>
                         ))}
                     </select>
+                    {activeEmployees.length === 0 && (
+                        <p className="text-xs mt-1" style={{ color: "#d97706" }}>No active employees found.</p>
+                    )}
                 </div>
                 <div>
                     <label style={label}>Notes</label>

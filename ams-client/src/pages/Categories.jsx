@@ -262,7 +262,7 @@ export default function Categories() {
                     <div className="relative">
                         <input value={search} onChange={e => setSearch(e.target.value)}
                             placeholder="Search categories…"
-                            className="pl-3 pr-3 py-2 text-xs rounded border outline-none w-48"
+                            className="pl-3 pr-3 py-2 text-xs rounded border outline-none w-full sm:w-48"
                             style={{ borderColor: "#e2e8f0", color: "#1e293b" }}
                             onFocus={fi} onBlur={fo} />
                     </div>

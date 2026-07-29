@@ -283,7 +283,7 @@ export default function Purchases() {
             <StatStrip purchases={purchases} />
 
             {/* ── Tabs ───────────────────────────────────── */}
-            <div className="flex gap-1 mb-3">
+            <div className="flex flex-wrap gap-1 mb-3">
                 {STATUS_TABS.map(tab => {
                     const active = activeTab === tab.key;
                     return (
@@ -309,6 +309,7 @@ export default function Purchases() {
 
             {/* ── Table ──────────────────────────────────── */}
             <DataTable
+                key={activeTab}
                 columns={columns}
                 data={filtered}
                 loading={loading}

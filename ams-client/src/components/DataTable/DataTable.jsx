@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import EmptyState from "./EmptyState";
 import Pagination from "./Pagination";
@@ -14,6 +14,17 @@ export default function DataTable({
     const [currentPage,  setCurrentPage]  = useState(1);
     const [rowsPerPage,  setRowsPerPage]  = useState(10);
     const [sortConfig,   setSortConfig]   = useState({ key: "", direction: "asc" });
+
+    // ── Reset to page 1 whenever filter/search produces a different result set ──
+    // Use length + first-item key as a lightweight identity check to avoid
+    // resetting on every object reference change from useMemo rebuilds.
+    const dataKey = data.length > 0
+        ? `${data.length}-${data[0]?.asset_id ?? data[0]?.email ?? data[0]?.assignment_id ?? data[0]?.log_id ?? data[0]?.request_id ?? 0}`
+        : "empty";
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [dataKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const sortedData = useMemo(() => {
         if (!sortConfig.key) return [...data];

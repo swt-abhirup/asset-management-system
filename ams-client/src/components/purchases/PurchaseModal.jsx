@@ -75,7 +75,7 @@ export default function PurchaseModal({ purchase, vendors, onClose, onSaved }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center"
             style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
 
-            <div className="w-full max-w-3xl rounded-xl shadow-2xl flex flex-col max-h-[90vh]"
+            <div className="w-full max-w-3xl mx-4 sm:mx-auto rounded-xl shadow-2xl flex flex-col max-h-[90vh]"
                 style={{ backgroundColor: "#fff" }}>
 
                 {/* Header */}
@@ -166,7 +166,8 @@ export default function PurchaseModal({ purchase, vendors, onClose, onSaved }) {
                         </div>
 
                         {/* Header row */}
-                        <div className="grid gap-2 mb-1"
+                        <div className="overflow-x-auto">
+                        <div className="grid gap-2 mb-1 min-w-[480px]"
                             style={{ gridTemplateColumns: "1fr 80px 100px 100px 28px" }}>
                             {["Item / Description", "Qty", "Unit Price (₹)", "Subtotal", ""].map(h => (
                                 <p key={h} className="text-xs font-semibold px-1" style={{ color: "#94a3b8" }}>{h}</p>
@@ -174,7 +175,7 @@ export default function PurchaseModal({ purchase, vendors, onClose, onSaved }) {
                         </div>
 
                         {form.items.map((item, idx) => (
-                            <div key={idx} className="grid gap-2 mb-2 items-center"
+                            <div key={idx} className="grid gap-2 mb-2 items-center min-w-[480px]"
                                 style={{ gridTemplateColumns: "1fr 80px 100px 100px 28px" }}>
                                 <input value={item.name}
                                     onChange={e => setItem(idx, "name", e.target.value)}
@@ -202,6 +203,7 @@ export default function PurchaseModal({ purchase, vendors, onClose, onSaved }) {
                                 ) : <div />}
                             </div>
                         ))}
+                        </div>
 
                         {/* Total */}
                         <div className="flex justify-end mt-2 pt-2 border-t" style={{ borderColor: "#f1f5f9" }}>
